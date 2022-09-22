@@ -5,11 +5,17 @@ body {
 }
 
 .display {
+    display: flex;
     flex-grow: 1;
     background-color: aliceblue;
     height: 128px;
     border-radius: 16px;
     margin-bottom: 8px;
+    text-align: right;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 90px;
+    padding: 4px;
 }
 
 .container {
