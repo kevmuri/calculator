@@ -1,8 +1,9 @@
 let num1 = null;
 let operator = null;
-const display = document.getElementById("display")
+const display = document.getElementById("display");
 const numButtons = document.getElementsByClassName("number");
 const operators = document.getElementsByClassName("operator");
+const buttons = document.querySelectorAll("button");
 
 document.getElementById("clear").addEventListener("click", function(){clear()});
 document.getElementById("operate").addEventListener("click", function(){operate()});
@@ -15,60 +16,77 @@ for (let i = 0; i < numButtons.length; i++) {
     numButtons[i].addEventListener("click", function(){appendNumber(this.innerHTML)});
 }
 
-function appendNumber (value) {
+function appendNumber(value) {
     if (display.innerHTML == "0") {
         display.innerHTML= "";
     }
-    display.innerHTML += value;
+
+    if (display.innerHTML.length < 20) {
+        display.innerHTML += value;
+    }
 }
 
-function clear () {
-    document.getElementById("display").innerHTML = "0";
+function clear() {
+    display.innerHTML = "0";
     num1 = null;
     operator = null;
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false;
+    }
 }
 
-function setOperator (value) {
+function setOperator(value) {
     switch (value) {
         case "+":
             operator = "add";
-            num1 = Number(document.getElementById("display").innerHTML);
-            document.getElementById("display").innerHTML = "0";
+            num1 = Number(display.innerHTML);
+            display.innerHTML = "0";
             break;
         case "-":
             operator = "subtract";
-            num1 = Number(document.getElementById("display").innerHTML);
-            document.getElementById("display").innerHTML = "0";
+            num1 = Number(display.innerHTML);
+            display.innerHTML = "0";
             break;
-        case "x":
+        case "*":
             operator = "multiply";
-            num1 = Number(document.getElementById("display").innerHTML);
-            document.getElementById("display").innerHTML = "0";
+            num1 = Number(display.innerHTML);
+            display.innerHTML = "0";
             break;
         case "/":
             operator = "divide";
-            num1 = Number(document.getElementById("display").innerHTML);
-            document.getElementById("display").innerHTML = "0";
+            num1 = Number(display.innerHTML);
+            display.innerHTML = "0";
             break;
     }
 }
 
-function operate () {
+function operate() {
     console.log(operator)
     switch (operator) {
         case "add":
-            document.getElementById("display").innerHTML = num1 + Number(document.getElementById("display").innerHTML);
+            display.innerHTML = num1 + Number(display.innerHTML);
             break;
         case "subtract":
-            document.getElementById("display").innerHTML = num1 - Number(document.getElementById("display").innerHTML);
+            display.innerHTML = num1 - Number(display.innerHTML);
             break;
         case "multiply":
-            document.getElementById("display").innerHTML = num1 * Number(document.getElementById("display").innerHTML);
+            display.innerHTML = num1 * Number(display.innerHTML);
             break;
         case "divide":
-
-
-            document.getElementById("display").innerHTML = num1 / Number(document.getElementById("display").innerHTML);
+            if (display.innerHTML == "0") {
+                error();
+                break;
+            }
+            display.innerHTML = num1 / Number(display.innerHTML);
             break;
     }
+}
+
+function error() {
+    display.innerHTML = "Error! Press Clear, doofus."
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+    }
+    document.getElementById("clear").disabled = false;
 }

@@ -6,22 +6,23 @@ body {
 
 .display {
     display: flex;
-    flex-grow: 1;
     background-color: aliceblue;
-    height: 128px;
+    height: 64px;
     border-radius: 16px;
     margin-bottom: 8px;
     text-align: right;
     align-items: center;
     justify-content: flex-end;
-    font-size: 90px;
     padding: 4px;
+    font-size: 24px;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     margin: 64px;
+    flex-shrink: 1;
+    flex-grow: 0;
 }
 
 .row {
@@ -35,8 +36,8 @@ button {
     border: 0px;
     padding: 16px;
     margin: 4px;
-    font-size: 64px;
-    width: 90px;
+    font-size: 40px;
+    width: 64px;
     text-align: center;
 }
 
