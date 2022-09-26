@@ -43,21 +43,33 @@ function clear() {
 function setOperator(value) {
     switch (value) {
         case "+":
+            if (operator != "+") {
+                openOperation = false;
+            }
             operator = "add";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
             break;
         case "-":
+            if (operator != "-") {
+                openOperation = false;
+            }
             operator = "subtract";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
             break;
         case "*":
+            if (operator != "*") {
+                openOperation = false;
+            }
             operator = "multiply";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
             break;
         case "/":
+            if (operator != "/") {
+                openOperation = false;
+            }
             operator = "divide";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
@@ -93,7 +105,7 @@ function operate() {
                     break;
                 }
                 num2 = Number(display.innerHTML);
-                display.innerHTML = num1 - num2;
+                display.innerHTML = num1 / num2;
                 openOperation = true;
                 num1 = display.innerHTML;
                 break;
