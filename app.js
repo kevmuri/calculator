@@ -23,7 +23,7 @@ function appendNumber(value) {
         display.innerHTML= "";
     }
 
-    if (display.innerHTML.length < 20) {
+    if (display.innerHTML.length < 18) {
         display.innerHTML += value;
     }
 }
@@ -48,48 +48,39 @@ function setOperator(value) {
     switch (value) {
         case "+":
             operator = "add";
-            num1 = Number(display.innerHTML);
-            display.innerHTML = "0";
             break;
         case "-":
             operator = "subtract";
-            num1 = Number(display.innerHTML);
-            display.innerHTML = "0";
             break;
         case "*":
             operator = "multiply";
-            num1 = Number(display.innerHTML);
-            display.innerHTML = "0";
             break;
         case "/":
             operator = "divide";
-            num1 = Number(display.innerHTML);
-            display.innerHTML = "0";
             break;
     }
+    num1 = Number(display.innerHTML);
+    display.innerHTML = "0";
 }
 
 function operate() {
     console.log(operator)
+    num2 = Number(display.innerHTML);
     switch (operator) {
         case "add":
-            num2 = Number(display.innerHTML);
             result = num1 + num2;
             break;
         case "subtract":
-            num2 = Number(display.innerHTML);
             result = num1 - num2;
             break;
         case "multiply":
-            num2 = Number(display.innerHTML);
             result = num1 * num2;
             break;
         case "divide":
-            if (display.innerHTML == "0") {
+            if (num2 == "0") {
                 error();
-                break;
+                return;
             }
-            num2 = Number(display.innerHTML);
             result = num1 / num2;
             break;
     }
@@ -99,7 +90,8 @@ function operate() {
 }
 
 function error() {
-    display.innerHTML = "Error! Press Clear, doofus."
+    display.innerHTML = "DIV 0 ERROR!"
+    
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].disabled = true;
     }
