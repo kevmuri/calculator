@@ -1,4 +1,4 @@
-let num1 = null;
+let num1 = 0;
 let operator = null;
 const display = document.getElementById("display");
 const numButtons = document.getElementsByClassName("number");
@@ -28,7 +28,7 @@ function appendNumber(value) {
 
 function clear() {
     display.innerHTML = "0";
-    num1 = null;
+    num1 = 0;
     operator = null;
 
     for (let i = 0; i < buttons.length; i++) {
