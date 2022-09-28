@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 let num1 = 0;
+=======
+let num1 = null;
+let num2 = null;
+let openOperation = false;
+>>>>>>> eb0a715349a3505dbec7ada01523ed04e51e73fc
 let operator = null;
 const display = document.getElementById("display");
 const numButtons = document.getElementsByClassName("number");
@@ -28,7 +34,13 @@ function appendNumber(value) {
 
 function clear() {
     display.innerHTML = "0";
+<<<<<<< HEAD
     num1 = 0;
+=======
+    num1 = null;
+    num2 = null;
+    openOperation = false;
+>>>>>>> eb0a715349a3505dbec7ada01523ed04e51e73fc
     operator = null;
 
     for (let i = 0; i < buttons.length; i++) {
@@ -39,21 +51,33 @@ function clear() {
 function setOperator(value) {
     switch (value) {
         case "+":
+            if (operator != "+") {
+                openOperation = false;
+            }
             operator = "add";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
             break;
         case "-":
+            if (operator != "-") {
+                openOperation = false;
+            }
             operator = "subtract";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
             break;
         case "*":
+            if (operator != "*") {
+                openOperation = false;
+            }
             operator = "multiply";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
             break;
         case "/":
+            if (operator != "/") {
+                openOperation = false;
+            }
             operator = "divide";
             num1 = Number(display.innerHTML);
             display.innerHTML = "0";
@@ -63,23 +87,61 @@ function setOperator(value) {
 
 function operate() {
     console.log(operator)
-    switch (operator) {
-        case "add":
-            display.innerHTML = num1 + Number(display.innerHTML);
-            break;
-        case "subtract":
-            display.innerHTML = num1 - Number(display.innerHTML);
-            break;
-        case "multiply":
-            display.innerHTML = num1 * Number(display.innerHTML);
-            break;
-        case "divide":
-            if (display.innerHTML == "0") {
-                error();
+    if (openOperation == false) {
+        switch (operator) {
+            case "add":
+                num2 = Number(display.innerHTML);
+                display.innerHTML = num1 + num2;
+                openOperation = true;
+                num1 = Number(display.innerHTML);
                 break;
-            }
-            display.innerHTML = num1 / Number(display.innerHTML);
-            break;
+            case "subtract":
+                num2 = Number(display.innerHTML);
+                display.innerHTML = num1 - num2;
+                openOperation = true;
+                num1 = display.innerHTML;
+                break;
+            case "multiply":
+                num2 = Number(display.innerHTML);
+                display.innerHTML = num1 * num2;
+                openOperation = true;
+                num1 = display.innerHTML;
+                break;
+            case "divide":
+                if (display.innerHTML == "0") {
+                    error();
+                    break;
+                }
+                num2 = Number(display.innerHTML);
+                display.innerHTML = num1 / num2;
+                openOperation = true;
+                num1 = display.innerHTML;
+                break;
+        }
+    }
+    else {
+        switch (operator) {
+            case "add":
+                display.innerHTML = num1 + num2;
+                num1 = Number(display.innerHTML);
+                break;
+            case "subtract":
+                display.innerHTML = num1 - num2;
+                num1 = Number(display.innerHTML);
+                break;
+            case "multiply":
+                display.innerHTML = num1 * num2;
+                num1 = Number(display.innerHTML);
+                break;
+            case "divide":
+                if (display.innerHTML == "0") {
+                    error();
+                    break;
+                }
+                display.innerHTML = num1 / num2;
+                num1 = Number(display.innerHTML);
+                break;
+        }
     }
 }
 
