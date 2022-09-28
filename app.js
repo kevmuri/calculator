@@ -95,6 +95,7 @@ function operate() {
     }
     display.innerHTML = result;
     num1 = result;
+    operator = null;
 }
 
 function error() {
